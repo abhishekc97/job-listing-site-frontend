@@ -17,6 +17,7 @@
 .companyLogo {
     height: 64px;
     width: 64px;
+    border-radius: 16px;
 }
 
 .cardRight {

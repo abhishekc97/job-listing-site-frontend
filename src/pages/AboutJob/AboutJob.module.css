@@ -1,0 +1,171 @@
+.aboutJob {
+    padding: 20px;
+    height: 100%;
+}
+
+.companyCard {
+    padding: 10px;
+    display: flex;
+    margin-bottom: 10px;
+    width: 98%;
+}
+
+.cardLeft {
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.companyLogo {
+    height: 64px;
+    width: 64px;
+    border-radius: 16px;
+}
+
+.cardRight {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.rightTop {
+    display: flex;
+}
+
+.jobTitle {
+    font-weight: 500;
+    font-size: 25.3714px;
+    line-height: 89.19%;
+    color: #000000;
+    margin-right: 70%;
+}
+
+.rightMiddle {
+    display: flex;
+    color: #9c9c9c;
+    margin-top: 10px;
+}
+
+.companyName {
+    margin-right: 10px;
+}
+
+.companyLocation {
+    margin-right: 10px;
+}
+
+.rightBottom {
+    display: flex;
+    font-weight: 500;
+    font-size: 19.65px;
+    line-height: 89.19%;
+    color: #0038ff;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+}
+
+.postedTime {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 89.19%;
+    color: #0038ff;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    margin-right: 60%;
+    width: 30%;
+}
+
+.copyLink {
+    height: 30px;
+    width: 103px;
+    margin-right: 15px;
+    background: #ffffff;
+    border: 2px solid #cecece;
+    border-radius: 9px;
+    color: #9c9c9c;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 23px;
+    cursor: pointer;
+}
+
+.aboutPageMiddle {
+    display: flex;
+    justify-content: space-evenly;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.aboutJobWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 10px;
+    padding: 10px;
+}
+.aboutJobTop {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    color: #858585;
+}
+
+.aboutJobBottom {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    color: #0038ff;
+}
+
+.aboutPageBottom {
+    display: flex;
+    padding: 0px 10px;
+}
+.bottomLeft {
+    width: 80%;
+}
+
+.headline {
+    width: 20%;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 30px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 161.69%;
+    color: #858585;
+    text-align: justify;
+    margin: 0px 10px 10px 0px;
+    padding-right: 35px;
+}
+
+.skillsBottomRight {
+    width: 20%;
+}
+
+.skillsBox {
+    display: flex;
+    background: #ffffff;
+    border: 2px solid #cecece;
+    border-radius: 7px;
+    width: 275px;
+    height: 125px;
+    padding: 5px;
+    justify-content: flex-start;
+}
+
+.skillsBoxHeadline {
+    font-weight: 500;
+    font-size: 19.2099px;
+    line-height: 23px;
+    color: #000000;
+}

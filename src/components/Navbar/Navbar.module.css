@@ -1,0 +1,58 @@
+.navbar {
+    height: 10%;
+    width: 100%;
+    padding: 20px;
+}
+
+.top {
+    display: flex;
+    width: 100%;
+    height: 70%;
+}
+
+.appLogo {
+    width: 100px;
+    height: 46px;
+    background-color: white;
+    margin-right: 10px;
+    background: url("../../../public/images/mountain\ 1.png") no-repeat;
+}
+
+.appName {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 47px;
+    color: #0038ff;
+    margin-right: 60%;
+}
+
+.currentProfile {
+    display: flex;
+    align-items: center;
+}
+
+.profileGreeting {
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 22px;
+    color: #a4a4a4;
+    margin-right: 15px;
+}
+
+.profilePicture {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    border: 1px solid #a4a4a4;
+}
+
+.appDescText {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 25px;
+    color: #858585;
+}
+
+.blueText {
+    color: #0038ff;
+}
