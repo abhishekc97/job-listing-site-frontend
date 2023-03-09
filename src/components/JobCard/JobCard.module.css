@@ -1,0 +1,111 @@
+.jobCard {
+    padding: 10px;
+    display: flex;
+    margin-bottom: 10px;
+    border: 2px solid rgba(0, 56, 255, 0.31);
+    border-radius: 9px;
+    width: 98%;
+    cursor: pointer;
+}
+
+.cardLeft {
+    width: 5%;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.companyLogo {
+    height: 64px;
+    width: 64px;
+}
+
+.cardRight {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.rightTop {
+    display: flex;
+    cursor: pointer;
+}
+
+.jobTitle {
+    font-weight: 500;
+    font-size: 25.3714px;
+    line-height: 89.19%;
+    color: #000000;
+    margin-right: 70%;
+}
+
+.postedTime {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 89.19%;
+    color: #9c9c9c;
+}
+
+.rightMiddle {
+    display: flex;
+    color: #9c9c9c;
+    margin-top: 10px;
+}
+
+.numberOfEmployees {
+    margin-right: 10px;
+}
+
+.salary {
+    margin-right: 10px;
+}
+
+.location {
+    margin-right: 10px;
+}
+
+.rightBottom {
+    display: flex;
+    font-weight: 500;
+    font-size: 19.65px;
+    line-height: 89.19%;
+    color: #0038ff;
+    align-items: center;
+    height: 40px;
+}
+
+.jobMode {
+    margin-right: 10px;
+}
+
+.contractType {
+    width: 100px;
+    margin-right: 64%;
+}
+
+.editJob {
+    height: 40px;
+    width: 143px;
+    margin-right: 15px;
+    background: #0038ff;
+    border: none;
+    border-radius: 9px;
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    cursor: pointer;
+}
+
+.copyLink {
+    height: 40px;
+    width: 143px;
+    margin-right: 15px;
+    background: #ffffff;
+    border: 2px solid #cecece;
+    border-radius: 9px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    cursor: pointer;
+}

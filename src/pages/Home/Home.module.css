@@ -1,0 +1,156 @@
+.home {
+    padding: 20px;
+    height: 100%;
+    /* background-color: white; */
+}
+
+.homeTop {
+    display: flex;
+    margin-bottom: 5px;
+    padding: 5px;
+    height: 55px;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    flex: 2;
+    height: 50px;
+    background: #ffffff;
+    margin-right: 10px;
+    border: 2px solid #cecece;
+    border-radius: 9px;
+    padding: 0px 0px 0px 10px;
+    align-items: center;
+}
+
+.searchIcon {
+    height: 32px;
+    width: 32px;
+    margin-right: 5px;
+}
+
+.searchInput {
+    border: none;
+    width: 80%;
+    height: 30px;
+    font-size: 1rem;
+}
+.searchInput:focus {
+    outline: none;
+}
+
+.locationFilterBox {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    height: 50px;
+    background: #ffffff;
+    border: 2px solid #cecece;
+    border-radius: 9px;
+    margin-right: 400px;
+    padding: 0px 0px 0px 10px;
+    align-items: center;
+}
+
+.locationIcon {
+    height: 32px;
+    width: 32px;
+    margin-right: 5px;
+}
+
+.locationDropdown {
+    width: 80%;
+    height: 30px;
+    border: none;
+}
+
+.locationDropdown:focus {
+    outline: none;
+}
+
+.addJobbutton {
+    width: 200px;
+    height: 50px;
+    margin-right: 10px;
+    background-color: #0038ff;
+    border: none;
+    border-radius: 9px;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.homeMiddle {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.middleText {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    color: #858585;
+}
+
+.skillsFilterBox {
+    display: flex;
+    height: 50px;
+    padding: 0px 0px 5px 10px;
+    align-items: center;
+}
+
+.skillsSelectDropdown {
+    align-items: center;
+    width: 143px;
+    height: 40px;
+    border: 2px solid #cecece;
+    border-radius: 9px;
+}
+
+.skillsSelectDropdown:focus {
+    outline: none;
+}
+
+.homeBottom {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+}
+
+.totalJobs {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    color: #858585;
+    margin-bottom: 10px;
+}
+
+.listings {
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden auto;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
