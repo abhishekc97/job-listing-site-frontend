@@ -2,7 +2,7 @@ import styles from "./Navbar.module.css";
 
 export default function Navbar() {
     return (
-        <div className={styles.navbar}>
+        <div className={styles.navbarTop}>
             <div className={styles.top}>
                 <div className={styles.appLogo}></div>
                 <span className={styles.appName}>FindMyJobs</span>
