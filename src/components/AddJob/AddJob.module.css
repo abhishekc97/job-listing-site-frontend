@@ -1,4 +1,4 @@
-.editJobModal {
+.addJobModal {
     margin: 5px;
     border: none;
     position: absolute;
@@ -23,7 +23,7 @@
     width: 1217px;
     border: none;
 }
-.editJob {
+.addJob {
     display: flex;
     flex-direction: column;
     margin: 5px;

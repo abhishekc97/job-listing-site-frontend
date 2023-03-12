@@ -1,26 +1,10 @@
-import styles from "./EditJob.module.css";
+import styles from "./AddJob.module.css";
 import Modal from "react-bootstrap/Modal";
 import { useState, useEffect } from "react";
-import { getJobPost, createJobPost, editJobPost } from "../../api/jobsAPI";
+import { getJobPost, createJobPost } from "../../api/jobsAPI";
 
-export default function EditJob({ job, show, onClose }) {
-    console.log(job);
-    useEffect(() => {
-        console.log(job);
-        console.log(values);
-    }, []);
-
-    const [jobId, setJobId] = useState(job._id);
-    const [companyName, setCompanyName] = useState(job.companyName);
-    const [companyLogo, setCompanyLogo] = useState(job.companyLogo);
-    const [jobPosition, setJobPosition] = useState(job.jobPosition);
-    const [monthlySalary, setMonthlySalary] = useState(job.monthlySalary);
-    const [jobType, setJobType] = useState(job.jobType);
-    const [jobMode, setJobMode] = useState(job.jobMode);
-    const [jobLocation, setJobLocation] = useState(job.jobLocation);
-    const [jobDescription, setJobDescription] = useState(job.jobDescription);
-    const [aboutCompany, setAboutCompany] = useState(job.aboutCompany);
-    const [skillset, setSkillset] = useState(job.skillset);
+export default function AddJob({ show, onClose, onJobPostAdded }) {
+    // const [jobData, setJobData] = useState();
 
     const [values, setValues] = useState({
         companyName: "",
@@ -35,25 +19,11 @@ export default function EditJob({ job, show, onClose }) {
         skillset: "",
     });
 
-    async function getJobDetails() {
-        const foundJobData = await getJobPost(jobId);
-
-        if (foundJobData) {
-            // const res = await foundJobData.json();
-            setValues(foundJobData);
-        }
-    }
-
-    useEffect(() => {
-        getJobDetails();
-        console.log(values);
-    }, []);
-
     async function handleSubmit(event) {
         event.preventDefault();
         console.log(values);
         // api call to save
-        await editJobPost(jobId, values).then(console.log("done"));
+        await createJobPost(values).then(console.log("done"));
         onClose();
     }
 
@@ -70,11 +40,11 @@ export default function EditJob({ job, show, onClose }) {
             show={show}
             onHide={onClose}
             keyboard={false}
-            className={styles.editJobModal}
+            className={styles.addJobModal}
             dialogClassName={styles.myModalDialog}
             contentClassName={styles.myModalContent}
         >
-            <div className={styles.editJob}>
+            <div className={styles.addJob}>
                 <div className={styles.headline}>FindMyJobs</div>
                 <div className={styles.formDescription}>
                     Add job description
@@ -90,7 +60,6 @@ export default function EditJob({ job, show, onClose }) {
                         <input
                             type="text"
                             name="companyName"
-                            value={values.companyName}
                             className={styles.formInput}
                             placeholder="Enter your company name here"
                             onChange={onChange}
@@ -103,7 +72,6 @@ export default function EditJob({ job, show, onClose }) {
                         <input
                             type="text"
                             name="companyLogo"
-                            value={values.companyLogo}
                             className={styles.formInput}
                             placeholder="Enter the link"
                             onChange={onChange}
@@ -116,7 +84,6 @@ export default function EditJob({ job, show, onClose }) {
                         <input
                             type="text"
                             name="jobPosition"
-                            value={values.jobPosition}
                             className={styles.formInput}
                             placeholder="Enter job position"
                             onChange={onChange}
@@ -129,7 +96,6 @@ export default function EditJob({ job, show, onClose }) {
                         <input
                             type="text"
                             name="monthlySalary"
-                            value={values.monthlySalary}
                             className={styles.formInput}
                             placeholder="Enter Amount in rupees"
                             onChange={onChange}
@@ -141,9 +107,9 @@ export default function EditJob({ job, show, onClose }) {
                         </label>
                         <select
                             name="jobType"
-                            value={values.jobType}
                             className={styles.formSelect}
                             onChange={onChange}
+                            defaultValue="default"
                         >
                             <option value="default" disabled>
                                 Select
@@ -159,9 +125,9 @@ export default function EditJob({ job, show, onClose }) {
                         </label>
                         <select
                             name="jobMode"
-                            value={values.jobMode}
                             className={styles.formSelect}
                             onChange={onChange}
+                            defaultValue="default"
                         >
                             <option value="default" disabled>
                                 Select
@@ -177,7 +143,6 @@ export default function EditJob({ job, show, onClose }) {
                         <input
                             type="text"
                             name="jobLocation"
-                            value={values.jobLocation}
                             className={styles.formInput}
                             placeholder="Enter Location"
                             onChange={onChange}
@@ -190,7 +155,6 @@ export default function EditJob({ job, show, onClose }) {
                         <input
                             type="text"
                             name="jobDescription"
-                            value={values.jobDescription}
                             className={styles.formInput}
                             placeholder="Type the job description"
                             onChange={onChange}
@@ -203,7 +167,6 @@ export default function EditJob({ job, show, onClose }) {
                         <input
                             type="text"
                             name="aboutCompany"
-                            value={values.aboutCompany}
                             className={styles.formInput}
                             placeholder="Type about your company"
                             onChange={onChange}
@@ -216,7 +179,6 @@ export default function EditJob({ job, show, onClose }) {
                         <input
                             type="text"
                             name="skillset"
-                            value={values.skillset}
                             className={styles.formInput}
                             placeholder="Enter the must have skills"
                             onChange={onChange}
