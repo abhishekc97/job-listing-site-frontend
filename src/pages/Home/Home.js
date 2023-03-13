@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Home.module.css";
 import JobCard from "../../components/JobCard/JobCard";
 import AddJob from "../../components/AddJob/AddJob";
@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
-    const search = useRef();
+    const [searchValue, setSearchValue] = useState("");
     const [jobs, setJobs] = useState([]);
     const [showAddJobModal, setShowAddJobModal] = useState(false);
     let totalJobs = jobs.length;
@@ -18,13 +18,9 @@ export default function Home() {
         jobsArray = await getAllJobPosts();
         setJobs([...jobsArray]);
         totalJobs = jobs.length;
-        console.log(jobsArray);
     }
 
-    useEffect(() => {
-        console.log(jobs);
-        console.log(jobs.length);
-    }, [jobs]);
+    useEffect(() => {}, [jobs]);
 
     useEffect(() => {
         fetchAllJobPosts();
@@ -33,12 +29,10 @@ export default function Home() {
     // re-fetch all job posts after new one is made
     async function handleJobPostAdded() {
         fetchAllJobPosts();
-        console.log("inside job post added");
     }
 
     async function handleJobPostUpdated() {
         fetchAllJobPosts();
-        console.log(jobs);
     }
 
     function toastAlert() {
@@ -58,9 +52,10 @@ export default function Home() {
                             <div className={styles.searchIcon} />
                             <input
                                 type="text"
-                                placeholder="Job, title or keyword"
-                                ref={search}
+                                placeholder="Search by job title..."
                                 className={styles.searchInput}
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
                             />
                         </div>
                         <button
@@ -100,18 +95,37 @@ export default function Home() {
                             {totalJobs}+ jobs
                         </div>
                         <div className={styles.listings}>
-                            {/* <JobCard /> */}
                             {jobs.length !== 0 &&
-                                jobs.map((job) => (
-                                    <JobCard
-                                        key={job._id}
-                                        job={job}
-                                        handleJobPostUpdated={
-                                            handleJobPostUpdated
-                                        }
-                                        toastAlert={toastAlert}
-                                    />
-                                ))}
+                                jobs
+                                    .filter((job) => {
+                                        if (searchValue.length > 1) {
+                                            const searchTerm =
+                                                typeof searchValue ===
+                                                    "string" &&
+                                                searchValue.length > 1
+                                                    ? searchValue.toLocaleLowerCase()
+                                                    : "";
+                                            const jobName =
+                                                typeof job.jobPosition ===
+                                                "string"
+                                                    ? job.jobPosition.toLocaleLowerCase()
+                                                    : "";
+                                            return searchTerm &&
+                                                typeof jobName === "string"
+                                                ? jobName.includes(searchTerm)
+                                                : "";
+                                        } else return job;
+                                    })
+                                    .map((job) => (
+                                        <JobCard
+                                            key={job._id}
+                                            job={job}
+                                            handleJobPostUpdated={
+                                                handleJobPostUpdated
+                                            }
+                                            toastAlert={toastAlert}
+                                        />
+                                    ))}
                             <ToastContainer />
                         </div>
                     </div>
