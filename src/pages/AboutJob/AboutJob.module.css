@@ -33,8 +33,12 @@
     height: 64px;
     width: 64px;
     border-radius: 16px;
+    background-size: contain;
 }
-
+.companyLogoImg {
+    height: 64px;
+    width: 64px;
+}
 .cardRight {
     width: 95%;
     display: flex;
