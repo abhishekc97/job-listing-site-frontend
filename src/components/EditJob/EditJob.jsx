@@ -1,26 +1,16 @@
 import styles from "./EditJob.module.css";
 import Modal from "react-bootstrap/Modal";
 import { useState, useEffect } from "react";
-import { getJobPost, createJobPost, editJobPost } from "../../api/jobsAPI";
+import { getJobPost, editJobPost } from "../../api/jobsAPI";
 
-export default function EditJob({ job, show, onClose }) {
+export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
     console.log(job);
     useEffect(() => {
         console.log(job);
         console.log(values);
     }, []);
 
-    const [jobId, setJobId] = useState(job._id);
-    const [companyName, setCompanyName] = useState(job.companyName);
-    const [companyLogo, setCompanyLogo] = useState(job.companyLogo);
-    const [jobPosition, setJobPosition] = useState(job.jobPosition);
-    const [monthlySalary, setMonthlySalary] = useState(job.monthlySalary);
-    const [jobType, setJobType] = useState(job.jobType);
-    const [jobMode, setJobMode] = useState(job.jobMode);
-    const [jobLocation, setJobLocation] = useState(job.jobLocation);
-    const [jobDescription, setJobDescription] = useState(job.jobDescription);
-    const [aboutCompany, setAboutCompany] = useState(job.aboutCompany);
-    const [skillset, setSkillset] = useState(job.skillset);
+    let jobId = job._id;
 
     const [values, setValues] = useState({
         companyName: "",
@@ -53,7 +43,10 @@ export default function EditJob({ job, show, onClose }) {
         event.preventDefault();
         console.log(values);
         // api call to save
-        await editJobPost(jobId, values).then(console.log("done"));
+        await editJobPost(jobId, values).then(() => {
+            handleJobPostUpdated();
+            console.log("job updated");
+        });
         onClose();
     }
 
@@ -230,7 +223,7 @@ export default function EditJob({ job, show, onClose }) {
                             Cancel
                         </button>
                         <button type="submit" className={styles.submitButton}>
-                            + Add Job
+                            Save
                         </button>
                     </div>
                 </form>

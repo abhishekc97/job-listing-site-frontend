@@ -4,22 +4,20 @@ import JobCard from "../../components/JobCard/JobCard";
 import AddJob from "../../components/AddJob/AddJob";
 import Navbar from "../../components/Navbar/Navbar";
 import { getAllJobPosts } from "../../api/jobsAPI";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
     const search = useRef();
-    const totalJobs = 40;
-
     const [jobs, setJobs] = useState([]);
     const [showAddJobModal, setShowAddJobModal] = useState(false);
+    let totalJobs = jobs.length;
 
     async function fetchAllJobPosts() {
         let jobsArray = [];
         jobsArray = await getAllJobPosts();
-        jobsArray.map((job) => {
-            console.log(job);
-        });
-
-        setJobs([...jobsArray]); //(prev) => [...prev, ...jobsArray]
+        setJobs([...jobsArray]);
+        totalJobs = jobs.length;
         console.log(jobsArray);
     }
 
@@ -30,7 +28,6 @@ export default function Home() {
 
     useEffect(() => {
         fetchAllJobPosts();
-        console.log(jobs);
     }, []);
 
     // re-fetch all job posts after new one is made
@@ -39,9 +36,21 @@ export default function Home() {
         console.log("inside job post added");
     }
 
+    async function handleJobPostUpdated() {
+        fetchAllJobPosts();
+        console.log(jobs);
+    }
+
+    function toastAlert() {
+        toast("Copied!", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+        });
+    }
+
     return (
         <div className={styles.appWrapper}>
             <Navbar />
+
             <div className={styles.pageWrapper}>
                 <div className={styles.home}>
                     <div className={styles.homeTop}>
@@ -54,16 +63,6 @@ export default function Home() {
                                 className={styles.searchInput}
                             />
                         </div>
-                        <div className={styles.locationFilterBox}>
-                            <div className={styles.locationIcon} />
-                            <select
-                                name="location"
-                                id="location"
-                                className={styles.locationDropdown}
-                            >
-                                <option value="xyz">xyz</option>
-                            </select>
-                        </div>
                         <button
                             className={styles.addJobbutton}
                             onClick={() => setShowAddJobModal(true)}
@@ -74,7 +73,7 @@ export default function Home() {
                             <AddJob
                                 show={showAddJobModal}
                                 onClose={() => setShowAddJobModal(false)}
-                                onJobPostAdded={handleJobPostAdded}
+                                handleJobPostAdded={handleJobPostAdded}
                             />
                         )}
                     </div>
@@ -87,8 +86,11 @@ export default function Home() {
                                 name="skills"
                                 id="skills"
                                 className={styles.skillsSelectDropdown}
-                                placeholder="Skills"
+                                defaultValue="default"
                             >
+                                <option value="default" disabled>
+                                    Skills
+                                </option>
                                 <option value="xyz">xyz</option>
                             </select>
                         </div>
@@ -101,8 +103,16 @@ export default function Home() {
                             {/* <JobCard /> */}
                             {jobs.length !== 0 &&
                                 jobs.map((job) => (
-                                    <JobCard key={job._id} job={job} />
+                                    <JobCard
+                                        key={job._id}
+                                        job={job}
+                                        handleJobPostUpdated={
+                                            handleJobPostUpdated
+                                        }
+                                        toastAlert={toastAlert}
+                                    />
                                 ))}
+                            <ToastContainer />
                         </div>
                     </div>
                 </div>

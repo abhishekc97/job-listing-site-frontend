@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import styles from "./JobCard.module.css";
-import { Link, useSearchParams } from "react-router-dom";
+import TimeAgo from "timeago-react";
+import { Link } from "react-router-dom";
 import EditJob from "../EditJob/EditJob.jsx";
 
-export default function JobCard({ job }) {
+export default function JobCard({ job, handleJobPostUpdated, toastAlert }) {
     const [showEditJobModal, setShowEditJobModal] = useState(false);
-
     const [jobData, setJobData] = useState();
+    let url = window.location.href;
+    let copylink = url + `job/${job._id}`;
 
     useEffect(() => {
         setJobData(job);
-        console.log(jobData, job);
     }, [job]);
+
+    function handleCopyLink() {
+        navigator.clipboard.writeText(copylink);
+        toastAlert();
+    }
 
     return (
         <div className={styles.jobCard}>
@@ -28,21 +34,33 @@ export default function JobCard({ job }) {
             <div className={styles.cardRight}>
                 <div className={styles.rightTop}>
                     <span className={styles.jobTitle}>{job.jobPosition}</span>
-                    <div className={styles.postedTime}>2 hours ago</div>
+                    <div className={styles.postedTime}>
+                        <TimeAgo datetime={job.createdAt} locale="en_US" />
+                    </div>
                 </div>
                 <div className={styles.rightMiddle}>
-                    <div className={styles.numberOfEmployees}>11-50</div>
-                    <div className={styles.salary}>50000</div>
-                    <div className={styles.location}>Mumbai</div>
+                    <div className={styles.numberOfEmployees}>
+                        <span className={styles.employeeCountIcon}></span>
+                        <span>{job.employeeCount}</span>
+                    </div>
+                    <div className={styles.salary}>
+                        <span className={styles.salaryIcon}></span>
+                        <span>{job.monthlySalary}</span>
+                    </div>
+                    <div className={styles.location}>
+                        <span className={styles.locationIcon}></span>
+                        <span>{job.jobLocation}</span>
+                    </div>
                 </div>
                 <div className={styles.rightBottom}>
-                    <div className={styles.jobMode}>Remote</div>
-                    <div className={styles.contractType}>Full time</div>
+                    <div className={styles.jobMode}>{job.jobMode}</div>
+                    <div className={styles.contractType}>{job.jobType}</div>
                     {showEditJobModal && (
                         <EditJob
                             job={job}
                             show={showEditJobModal}
                             onClose={setShowEditJobModal}
+                            handleJobPostUpdated={handleJobPostUpdated}
                         />
                     )}
                     <button
@@ -51,7 +69,12 @@ export default function JobCard({ job }) {
                     >
                         Edit Job
                     </button>
-                    <button className={styles.copyLink}>Copy Link</button>
+                    <button
+                        className={styles.copyLink}
+                        onClick={handleCopyLink}
+                    >
+                        Copy Link
+                    </button>
                 </div>
             </div>
             {/* </Link> */}

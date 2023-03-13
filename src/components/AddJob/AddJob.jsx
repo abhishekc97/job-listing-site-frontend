@@ -1,9 +1,9 @@
 import styles from "./AddJob.module.css";
 import Modal from "react-bootstrap/Modal";
 import { useState, useEffect } from "react";
-import { getJobPost, createJobPost } from "../../api/jobsAPI";
+import { createJobPost } from "../../api/jobsAPI";
 
-export default function AddJob({ show, onClose, onJobPostAdded }) {
+export default function AddJob({ show, onClose, handleJobPostAdded }) {
     // const [jobData, setJobData] = useState();
 
     const [values, setValues] = useState({
@@ -23,7 +23,10 @@ export default function AddJob({ show, onClose, onJobPostAdded }) {
         event.preventDefault();
         console.log(values);
         // api call to save
-        await createJobPost(values).then(console.log("done"));
+        await createJobPost(values).then(() => {
+            handleJobPostAdded();
+            console.log("job added");
+        });
         onClose();
     }
 
