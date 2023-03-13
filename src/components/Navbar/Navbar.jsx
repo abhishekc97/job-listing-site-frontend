@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
@@ -5,7 +6,9 @@ export default function Navbar() {
         <div className={styles.navbarTop}>
             <div className={styles.top}>
                 <div className={styles.appLogo}></div>
-                <span className={styles.appName}>FindMyJobs</span>
+                <Link className={styles.appName} to={`/`}>
+                    FindMyJobs
+                </Link>
                 <div className={styles.currentProfile}>
                     <span className={styles.profileGreeting}>
                         Hello Recruiter

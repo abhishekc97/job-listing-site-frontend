@@ -25,6 +25,7 @@
     line-height: 47px;
     color: #0038ff;
     margin-right: 60%;
+    text-decoration: none;
 }
 
 .currentProfile {
@@ -45,6 +46,9 @@
     width: 70px;
     border-radius: 50%;
     border: 1px solid #a4a4a4;
+    background: url("../../../public/images/Pexels\ Photo\ by\ Andrea\ Piacquadio.png")
+        no-repeat;
+    background-size: contain;
 }
 
 .appDescText {
