@@ -48,9 +48,7 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
         setValues({ ...values, [event.target.name]: event.target.value });
     };
 
-    useEffect(() => {
-        console.log(values);
-    }, [values]);
+    useEffect(() => {}, [values]);
 
     function toastAlert() {
         toast("Details updated!", {

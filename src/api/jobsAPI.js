@@ -5,7 +5,6 @@ const URL = process.env.REACT_APP_BACKEND_URL;
 // api to make a new job post
 export async function createJobPost(body) {
     try {
-        console.log(body);
         const reqUrl = `${URL}/api/jobs/new`;
         const result = await axios.post(reqUrl, body);
         if (result) {

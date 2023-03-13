@@ -19,11 +19,9 @@ export default function AddJob({ show, onClose, handleJobPostAdded }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        console.log(values);
         // api call to save
         await createJobPost(values).then(() => {
             handleJobPostAdded();
-            console.log("job added");
         });
         onClose();
     }
@@ -32,9 +30,7 @@ export default function AddJob({ show, onClose, handleJobPostAdded }) {
         setValues({ ...values, [event.target.name]: event.target.value });
     };
 
-    useEffect(() => {
-        console.log(values);
-    }, [values]);
+    useEffect(() => {}, [values]);
 
     return (
         <Modal
