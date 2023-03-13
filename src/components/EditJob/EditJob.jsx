@@ -2,13 +2,11 @@ import styles from "./EditJob.module.css";
 import Modal from "react-bootstrap/Modal";
 import { useState, useEffect } from "react";
 import { getJobPost, editJobPost } from "../../api/jobsAPI";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
-    console.log(job);
-    useEffect(() => {
-        console.log(job);
-        console.log(values);
-    }, []);
+    useEffect(() => {}, []);
 
     let jobId = job._id;
 
@@ -27,25 +25,21 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
 
     async function getJobDetails() {
         const foundJobData = await getJobPost(jobId);
-
         if (foundJobData) {
-            // const res = await foundJobData.json();
             setValues(foundJobData);
         }
     }
 
     useEffect(() => {
         getJobDetails();
-        console.log(values);
     }, []);
 
     async function handleSubmit(event) {
         event.preventDefault();
-        console.log(values);
         // api call to save
         await editJobPost(jobId, values).then(() => {
             handleJobPostUpdated();
-            console.log("job updated");
+            toastAlert();
         });
         onClose();
     }
@@ -57,6 +51,12 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
     useEffect(() => {
         console.log(values);
     }, [values]);
+
+    function toastAlert() {
+        toast("Details updated!", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+        });
+    }
 
     return (
         <Modal
@@ -75,7 +75,7 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                 <div className={styles.horizontalRow}>
                     <div className={styles.blueHorizontalRow}></div>
                 </div>
-                <form className={styles.jobDescForm} onSubmit={handleSubmit}>
+                <form className={styles.jobDescForm}>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>
                             Company Name
@@ -218,13 +218,22 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                     <div className={styles.formBottomRow}>
                         <button
                             onClick={onClose}
+                            name="close"
+                            value="close"
                             className={styles.closeButton}
                         >
                             Cancel
                         </button>
-                        <button type="submit" className={styles.submitButton}>
+                        <button
+                            type="submit"
+                            name="submit"
+                            value="submit"
+                            className={styles.submitButton}
+                            onClick={handleSubmit}
+                        >
                             Save
                         </button>
+                        <ToastContainer />
                     </div>
                 </form>
             </div>

@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { createJobPost } from "../../api/jobsAPI";
 
 export default function AddJob({ show, onClose, handleJobPostAdded }) {
-    // const [jobData, setJobData] = useState();
-
     const [values, setValues] = useState({
         companyName: "",
         companyLogo: "",
