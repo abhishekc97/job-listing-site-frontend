@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import styles from "./JobCard.module.css";
 import TimeAgo from "timeago-react";
 import { useNavigate } from "react-router-dom";

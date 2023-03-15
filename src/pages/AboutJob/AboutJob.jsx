@@ -1,10 +1,7 @@
 import Navbar from "../../components/Navbar/Navbar";
 import styles from "./AboutJob.module.css";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-
 import { getJobPost } from "../../api/jobsAPI";
-
 import TimeAgo from "timeago-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
