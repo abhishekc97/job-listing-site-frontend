@@ -123,11 +123,13 @@
     margin-right: 10px;
     padding: 10px;
 }
+
 .aboutJobTop {
     font-weight: 500;
     font-size: 20px;
     line-height: 29px;
     color: #858585;
+    text-align: center;
 }
 
 .aboutJobBottom {
@@ -135,6 +137,7 @@
     font-size: 20px;
     line-height: 29px;
     color: #0038ff;
+    text-align: center;
 }
 
 .aboutPageBottom {
@@ -164,18 +167,17 @@
     padding-right: 35px;
 }
 
-.skillsBottomRight {
+.aboutBottomRight {
     width: 20%;
 }
 
 .skillsBox {
-    display: flex;
     background: #ffffff;
     border: 2px solid #cecece;
     border-radius: 7px;
-    width: 275px;
-    height: 125px;
-    padding: 5px;
+    max-width: 1000%;
+    min-height: 60%;
+    padding: 5px 22px;
     justify-content: flex-start;
 }
 
@@ -184,4 +186,26 @@
     font-size: 19.2099px;
     line-height: 23px;
     color: #000000;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.skillsGridBox {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    column-gap: 0px;
+}
+
+.skillbox {
+    height: 25px;
+    max-width: 100px;
+    color: white;
+    background-color: #0038ff;
+    font-size: 1rem;
+    line-height: 1.2rem;
+    text-align: center;
+    padding: 2px;
+    border-radius: 5.5px;
+    margin-right: 10px;
 }

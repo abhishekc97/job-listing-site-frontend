@@ -12,7 +12,9 @@ export default function Home() {
     const [searchValue, setSearchValue] = useState("");
     const [jobs, setJobs] = useState([]);
     const [showAddJobModal, setShowAddJobModal] = useState(false);
+    const [selectedSkills, setSelectedSkills] = useState([]);
     let totalJobs = jobs.length;
+
     const skillOptionList = [
         { id: 1, name: "HTML" },
         { id: 2, name: "SQL" },
@@ -20,34 +22,6 @@ export default function Home() {
         { id: 4, name: "Mongo" },
         { id: 5, name: "JS" },
     ];
-    // const [skillOptions, setSkillOptions] = useState(skillOptionList); no need
-
-    const [selectedSkills, setSelectedSkills] = useState([]);
-
-    function onSelectSkills(skill) {
-        const skillname = Object.entries(skill);
-        setSelectedSkills(skillname);
-    }
-
-    function onRemoveSkills(skill) {
-        const skillname = Object.entries(skill);
-        setSelectedSkills(skillname);
-    }
-
-    const [selectedSkillsArr, setSelectedSkillsArr] = useState([]);
-
-    useEffect(() => {
-        // console.log("as it is", selectedSkills);
-        let arr = [];
-        selectedSkills?.map((obj) => {
-            let value = obj[1].name;
-            arr.push(value);
-            console.log(arr);
-        });
-        setSelectedSkillsArr(arr);
-    }, [selectedSkills]);
-    // console.log(selectedSkillsArr.length);
-    // console.log(jobs);
 
     async function fetchAllJobPosts() {
         let jobsArray = [];
@@ -77,10 +51,84 @@ export default function Home() {
         });
     }
 
-    const handleSkillsChange = (e) => {
-        setSelectedSkills(
-            Array.from(e.target.selectedOptions, (option) => option.value)
-        );
+    // All Logic to handle skills filter change
+    const [selectedSkillsArr, setSelectedSkillsArr] = useState([]);
+
+    function handleSkillsChange() {
+        let arr = [];
+        selectedSkills?.map((obj) => {
+            let value = obj[1].name;
+            arr.push(value);
+            return true;
+        });
+        setSelectedSkillsArr(arr);
+    }
+
+    function onSelectSkills(skill) {
+        const skillname = Object.entries(skill);
+        setSelectedSkills(skillname);
+    }
+
+    function onRemoveSkills(skill) {
+        const skillname = Object.entries(skill);
+        setSelectedSkills(skillname);
+    }
+
+    useEffect(() => {
+        handleSkillsChange();
+    }, [selectedSkills]);
+
+    // custom style for the skills filter box
+    const customSkillBoxStyles = {
+        multiselectContainer: {
+            width: "500px",
+            display: "flex",
+            position: "relative",
+        },
+        searchWrapper: {
+            border: "2px solid #CECECE",
+            position: "relative",
+            display: "flex",
+            flexDirection: "row-reverse",
+            padding: "5px",
+            "justify-content": "center",
+        },
+        "search-wrapper": {
+            border: "2px solid #CECECE",
+            position: "relative",
+            display: "flex",
+            "flex-direction": "row-reverse",
+            padding: "5px",
+            "justify-content": "center",
+        },
+        input: {
+            border: "2px solid #CECECE",
+        },
+        searchBox: {
+            border: "2px solid #CECECE",
+            fontSize: "19px",
+            minHeight: "50px",
+        },
+        inputField: {
+            margin: "5px",
+        },
+        chip: {
+            background: "#0038FF",
+            "line-height": "19px",
+        },
+        optionListContainer: {
+            position: "absolute",
+            top: "50px",
+        },
+        optionContainer: {
+            border: "2px solid",
+            background: "#FFF",
+            position: "absolute",
+            top: "50px",
+        },
+        option: {
+            color: "#000",
+        },
     };
 
     return (
@@ -125,6 +173,8 @@ export default function Home() {
                                 displayValue="name"
                                 onSelect={onSelectSkills}
                                 onRemove={onRemoveSkills}
+                                showCheckbox
+                                style={customSkillBoxStyles}
                             />
                         </div>
                     </div>
@@ -136,6 +186,7 @@ export default function Home() {
                             {jobs.length !== 0 &&
                                 jobs
                                     .filter((job) => {
+                                        // Filter by the search term
                                         if (searchValue.length > 1) {
                                             const searchTerm =
                                                 typeof searchValue ===

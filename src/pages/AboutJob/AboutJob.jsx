@@ -145,11 +145,26 @@ export default function AboutJob() {
                                     {selectedJobPost.aboutCompany}
                                 </p>
                             </div>
-                            <div className={styles.skillsBottomRight}>
+                            <div className={styles.aboutBottomRight}>
                                 <div className={styles.skillsBox}>
-                                    <span className={styles.skillsBoxHeadline}>
+                                    <div className={styles.skillsBoxHeadline}>
                                         Skills Mandatory
-                                    </span>
+                                    </div>
+                                    <div className={styles.skillsGridBox}>
+                                        {selectedJobPost?.skillset &&
+                                            selectedJobPost.skillset.map(
+                                                (skill) => (
+                                                    <div
+                                                        key={skill}
+                                                        className={
+                                                            styles.skillbox
+                                                        }
+                                                    >
+                                                        {skill}
+                                                    </div>
+                                                )
+                                            )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
