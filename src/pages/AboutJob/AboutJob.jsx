@@ -47,10 +47,10 @@ export default function AboutJob() {
     }
 
     return (
-        <div className={styles.appWrapper}>
+        <div className={styles.mainWrapper}>
             <Navbar />
             <ToastContainer />
-            <div className={styles.pageWrapper}>
+            <>
                 {selectedJobPost ? (
                     <div className={styles.aboutJob}>
                         <div className={styles.aboutPageTop}>
@@ -99,35 +99,43 @@ export default function AboutJob() {
                             </div>
                         </div>
                         <div className={styles.aboutPageMiddle}>
-                            <div className={styles.aboutJobWrapper}>
-                                <div className={styles.aboutJobTop}>
+                            <div className={styles.middleSectionDetailBox}>
+                                <div className={styles.middleSectionDetailTop}>
                                     Job Offer
                                 </div>
-                                <div className={styles.aboutJobBottom}>
+                                <div
+                                    className={styles.middleSectionDetailBottom}
+                                >
                                     {selectedJobPost.monthlySalary} per month
                                 </div>
                             </div>
-                            <div className={styles.aboutJobWrapper}>
-                                <div className={styles.aboutJobTop}>
+                            <div className={styles.middleSectionDetailBox}>
+                                <div className={styles.middleSectionDetailTop}>
                                     Job Mode
                                 </div>
-                                <div className={styles.aboutJobBottom}>
+                                <div
+                                    className={styles.middleSectionDetailBottom}
+                                >
                                     {selectedJobPost.jobMode}
                                 </div>
                             </div>
-                            <div className={styles.aboutJobWrapper}>
-                                <div className={styles.aboutJobTop}>
+                            <div className={styles.middleSectionDetailBox}>
+                                <div className={styles.middleSectionDetailTop}>
                                     Office/Remote
                                 </div>
-                                <div className={styles.aboutJobBottom}>
+                                <div
+                                    className={styles.middleSectionDetailBottom}
+                                >
                                     {selectedJobPost.jobType}
                                 </div>
                             </div>
-                            <div className={styles.aboutJobWrapper}>
-                                <div className={styles.aboutJobTop}>
+                            <div className={styles.middleSectionDetailBox}>
+                                <div className={styles.middleSectionDetailTop}>
                                     Location
                                 </div>
-                                <div className={styles.aboutJobBottom}>
+                                <div
+                                    className={styles.middleSectionDetailBottom}
+                                >
                                     {selectedJobPost.jobLocation}
                                 </div>
                             </div>
@@ -145,7 +153,7 @@ export default function AboutJob() {
                                     {selectedJobPost.aboutCompany}
                                 </p>
                             </div>
-                            <div className={styles.aboutBottomRight}>
+                            <div className={styles.bottomRight}>
                                 <div className={styles.skillsBox}>
                                     <div className={styles.skillsBoxHeadline}>
                                         Skills Mandatory
@@ -171,11 +179,10 @@ export default function AboutJob() {
                     </div>
                 ) : (
                     <div>
-                        {" "}
                         <p> No job post found </p>{" "}
                     </div>
                 )}
-            </div>
+            </>
         </div>
     );
 }
