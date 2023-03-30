@@ -1,8 +1,10 @@
-.appWrapper {
-    height: 100%;
+.homeWrapper {
+    /* height: 100vh; */
+    margin: 0 auto;
 }
 
-.pageWrapper {
+.homePageWrapper {
+    margin: 0 auto;
     width: 100%;
     height: 84%;
     border-radius: 14px;
@@ -13,6 +15,7 @@
 .home {
     padding: 20px;
     height: 100%;
+    margin: 0 auto;
 }
 
 .homeTop {

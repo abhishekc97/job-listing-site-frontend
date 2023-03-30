@@ -1,8 +1,8 @@
-.navbarTop {
-    height: 12%;
+.navbar {
+    /* height: 6vw; */
     width: 100%;
     padding: 0px 20px 5px 20px;
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
 }
 
 .top {

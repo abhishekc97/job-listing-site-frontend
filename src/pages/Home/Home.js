@@ -132,10 +132,10 @@ export default function Home() {
     };
 
     return (
-        <div className={styles.appWrapper}>
+        <div className={styles.homeWrapper}>
             <Navbar />
-
-            <div className={styles.pageWrapper}>
+            <ToastContainer />
+            <div className={styles.homePageWrapper}>
                 <div className={styles.home}>
                     <div className={styles.homeTop}>
                         <div className={styles.search}>
@@ -242,7 +242,6 @@ export default function Home() {
                                             toastAlert={toastAlert}
                                         />
                                     ))}
-                            <ToastContainer />
                         </div>
                     </div>
                 </div>
