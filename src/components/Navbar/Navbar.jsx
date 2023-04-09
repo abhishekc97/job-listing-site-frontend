@@ -5,7 +5,7 @@ export default function Navbar() {
     return (
         <div className={styles.navbar}>
             <div className={styles.top}>
-                <div className={styles.appLogo}></div>
+                <Link className={styles.appLogo} to={`/`}></Link>
                 <Link className={styles.appName} to={`/`}>
                     FindMyJobs
                 </Link>

@@ -14,6 +14,19 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
         companyName: "",
         companyLogo: "",
         jobPosition: "",
+        monthlySalary: 0,
+        jobType: "",
+        jobMode: "",
+        jobLocation: "",
+        jobDescription: "",
+        aboutCompany: "",
+        skillset: [],
+    });
+
+    const [formErrors, setFormErrors] = useState({
+        companyName: "",
+        companyLogo: "",
+        jobPosition: "",
         monthlySalary: "",
         jobType: "",
         jobMode: "",
@@ -36,12 +49,15 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        // api call to save
-        await editJobPost(jobId, values).then(() => {
-            handleJobPostUpdated();
-            toastAlert();
-        });
-        onClose();
+        const isValid = validateForm();
+        if (isValid) {
+            // api call to save
+            await editJobPost(jobId, values).then(() => {
+                handleJobPostUpdated();
+                toastAlert();
+            });
+            onClose();
+        }
     }
 
     const onChange = (event) => {
@@ -49,7 +65,51 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
     };
 
     useEffect(() => {}, [values]);
+    function validateForm() {
+        let isValid = true;
+        const errors = {};
 
+        if (!values.companyName.trim()) {
+            errors.companyName = "Company name is required";
+            isValid = false;
+        }
+
+        if (!values.jobPosition.trim()) {
+            errors.jobPosition = "Job position is required";
+            isValid = false;
+        }
+
+        if (!values.monthlySalary) {
+            errors.monthlySalary = "Monthly salary is required";
+            isValid = false;
+        } else if (!/^\d+$/.test(values.monthlySalary)) {
+            errors.monthlySalary = "Monthly salary should be a number";
+            isValid = false;
+        }
+
+        if (values.jobType === "") {
+            errors.jobType = "Please select job type";
+            isValid = false;
+        }
+
+        if (values.jobMode === "") {
+            errors.jobMode = "Please select remote or office";
+            isValid = false;
+        }
+
+        if (!values.jobLocation.trim()) {
+            errors.jobLocation = "Job location is required";
+            isValid = false;
+        }
+
+        if (!values.jobDescription.trim()) {
+            errors.jobDescription = "Job description is required";
+            isValid = false;
+        }
+
+        setFormErrors(errors);
+        return isValid;
+    }
     function toastAlert() {
         toast("Details updated!", {
             position: toast.POSITION.BOTTOM_RIGHT,
@@ -68,7 +128,7 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
             <div className={styles.editJob}>
                 <div className={styles.headline}>FindMyJobs</div>
                 <div className={styles.formDescription}>
-                    Add job description
+                    Edit job description
                 </div>
                 <div className={styles.horizontalRow}>
                     <div className={styles.blueHorizontalRow}></div>
@@ -76,7 +136,7 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                 <form className={styles.jobDescForm}>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>
-                            Company Name
+                            Company Name <sup>*</sup>
                         </label>
                         <input
                             type="text"
@@ -86,6 +146,11 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                             placeholder="Enter your company name here"
                             onChange={onChange}
                         />
+                        {formErrors.companyName && (
+                            <span className={styles.formValidationError}>
+                                {formErrors.companyName}
+                            </span>
+                        )}
                     </div>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>
@@ -102,7 +167,7 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                     </div>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>
-                            Job position
+                            Job position <sup>*</sup>
                         </label>
                         <input
                             type="text"
@@ -112,10 +177,15 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                             placeholder="Enter job position"
                             onChange={onChange}
                         />
+                        {formErrors.jobPosition && (
+                            <span className={styles.formValidationError}>
+                                {formErrors.jobPosition}
+                            </span>
+                        )}
                     </div>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>
-                            Monthly salary
+                            Monthly salary <sup>*</sup>
                         </label>
                         <input
                             type="text"
@@ -125,10 +195,15 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                             placeholder="Enter Amount in rupees"
                             onChange={onChange}
                         />
+                        {formErrors.monthlySalary && (
+                            <span className={styles.formValidationError}>
+                                {formErrors.monthlySalary}
+                            </span>
+                        )}
                     </div>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>
-                            Job Type
+                            Job Type <sup>*</sup>
                         </label>
                         <select
                             name="jobType"
@@ -143,10 +218,15 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                             <option value="Full Time">Full Time</option>
                             <option value="Contract">Contract</option>
                         </select>
+                        {formErrors.jobType && (
+                            <span className={styles.formValidationError}>
+                                {formErrors.jobType}
+                            </span>
+                        )}
                     </div>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>
-                            Remote/Office
+                            Remote/Office <sup>*</sup>
                         </label>
                         <select
                             name="jobMode"
@@ -160,10 +240,15 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                             <option value="Remote">Remote</option>
                             <option value="In-Office">In-Office</option>
                         </select>
+                        {formErrors.jobMode && (
+                            <span className={styles.formValidationError}>
+                                {formErrors.jobMode}
+                            </span>
+                        )}
                     </div>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>
-                            Location
+                            Location <sup>*</sup>
                         </label>
                         <input
                             type="text"
@@ -173,10 +258,15 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                             placeholder="Enter Location"
                             onChange={onChange}
                         />
+                        {formErrors.jobLocation && (
+                            <span className={styles.formValidationError}>
+                                {formErrors.jobLocation}
+                            </span>
+                        )}
                     </div>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>
-                            Job Description
+                            Job Description <sup>*</sup>
                         </label>
                         <input
                             type="text"
@@ -186,6 +276,11 @@ export default function EditJob({ job, show, onClose, handleJobPostUpdated }) {
                             placeholder="Type the job description"
                             onChange={onChange}
                         />
+                        {formErrors.jobDescription && (
+                            <span className={styles.formValidationError}>
+                                {formErrors.jobDescription}
+                            </span>
+                        )}
                     </div>
                     <div className={styles.formRow}>
                         <label htmlFor="" className={styles.formLabel}>

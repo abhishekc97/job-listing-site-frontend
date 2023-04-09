@@ -13,7 +13,8 @@ export default function Home() {
     const [jobs, setJobs] = useState([]);
     const [showAddJobModal, setShowAddJobModal] = useState(false);
     const [selectedSkills, setSelectedSkills] = useState([]);
-    let totalJobs = jobs.length;
+    const [filteredJobs, setFilteredJobs] = useState([]);
+    let totalJobs = filteredJobs.length;
 
     const skillOptionList = [
         { id: 1, name: "HTML" },
@@ -23,6 +24,7 @@ export default function Home() {
         { id: 5, name: "JS" },
     ];
 
+    // Fetch the list of jobs using API
     async function fetchAllJobPosts() {
         let jobsArray = [];
         jobsArray = await getAllJobPosts();
@@ -36,6 +38,10 @@ export default function Home() {
         fetchAllJobPosts();
     }, []);
 
+    useEffect(() => {
+        setFilteredJobs(jobs);
+    }, [jobs]);
+
     // re-fetch all job posts after new one is made
     async function handleJobPostAdded() {
         fetchAllJobPosts();
@@ -43,25 +49,6 @@ export default function Home() {
 
     async function handleJobPostUpdated() {
         fetchAllJobPosts();
-    }
-
-    function toastAlert() {
-        toast("Copied!", {
-            position: toast.POSITION.BOTTOM_RIGHT,
-        });
-    }
-
-    // All Logic to handle skills filter change
-    const [selectedSkillsArr, setSelectedSkillsArr] = useState([]);
-
-    function handleSkillsChange() {
-        let arr = [];
-        selectedSkills?.map((obj) => {
-            let value = obj[1].name;
-            arr.push(value);
-            return true;
-        });
-        setSelectedSkillsArr(arr);
     }
 
     function onSelectSkills(skill) {
@@ -77,6 +64,51 @@ export default function Home() {
     useEffect(() => {
         handleSkillsChange();
     }, [selectedSkills]);
+
+    // All Logic to handle skills filter change
+    const [selectedSkillsArr, setSelectedSkillsArr] = useState([]);
+
+    // additional logic to get names of individual selected filters
+    function handleSkillsChange() {
+        let arr = [];
+        selectedSkills?.map((obj) => {
+            let value = obj[1].name;
+            arr.push(value);
+            return true;
+        });
+        setSelectedSkillsArr(arr);
+    }
+
+    // function  to apply skills filter
+    function applySkillsFilter() {
+        let skillsFilteredArr = [];
+        skillsFilteredArr = jobs.filter((job) => {
+            // Filter by skillset
+            if (selectedSkillsArr.length > 0) {
+                const skillsetArr = job.skillset.map((skill) =>
+                    skill.toLowerCase()
+                );
+                for (let i = 0; i < selectedSkillsArr.length; i++) {
+                    const selectedSkill = selectedSkillsArr[i].toLowerCase();
+                    if (!skillsetArr.includes(selectedSkill)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        });
+        setFilteredJobs(skillsFilteredArr);
+    }
+
+    useEffect(() => {
+        applySkillsFilter();
+    }, [selectedSkillsArr]);
+
+    function toastAlert() {
+        toast("Copied!", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+        });
+    }
 
     // custom style for the skills filter box
     const customSkillBoxStyles = {
@@ -183,8 +215,8 @@ export default function Home() {
                             {totalJobs}+ jobs
                         </div>
                         <div className={styles.listings}>
-                            {jobs.length !== 0 &&
-                                jobs
+                            {filteredJobs.length !== 0 &&
+                                filteredJobs
                                     .filter((job) => {
                                         // Filter by the search term
                                         if (searchValue.length > 1) {
@@ -204,33 +236,6 @@ export default function Home() {
                                                 ? jobName.includes(searchTerm)
                                                 : "";
                                         } else return job;
-                                    })
-                                    .filter((job) => {
-                                        // Filter by skillset
-                                        if (selectedSkillsArr.length > 0) {
-                                            const skillsetArr =
-                                                job.skillset.map((skill) =>
-                                                    skill.toLowerCase()
-                                                );
-                                            for (
-                                                let i = 0;
-                                                i < selectedSkillsArr.length;
-                                                i++
-                                            ) {
-                                                const selectedSkill =
-                                                    selectedSkillsArr[
-                                                        i
-                                                    ].toLowerCase();
-                                                if (
-                                                    !skillsetArr.includes(
-                                                        selectedSkill
-                                                    )
-                                                ) {
-                                                    return false;
-                                                }
-                                            }
-                                        }
-                                        return true;
                                     })
                                     .map((job) => (
                                         <JobCard
